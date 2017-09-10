@@ -4,8 +4,6 @@
 
 **A controller library for event-based communication between client and CNCjs server**
  
-![image](https://cloud.githubusercontent.com/assets/447801/25939476/96bd5568-3665-11e7-9b6f-b96fe0dc73d8.png)
-
 ## Installation
 
 ```sh
