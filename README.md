@@ -49,7 +49,7 @@ controller.connect(host, options, () => {
     }, 60 * 1000);
 });
 
-controller.on('serialport:open', (options) => {
+controller.addListener('serialport:open', (options) => {
     const {
         port,
         baudrate,
@@ -58,16 +58,16 @@ controller.on('serialport:open', (options) => {
     console.log(`Connected to the port "${port}" with a baud rate of ${baudrate}.`, { port, baudrate });
 });
 
-controller.on('serialport:close', (options) => {
+controller.addListener('serialport:close', (options) => {
     const { port } = options;
     console.log(`The port "${port}" is disconnected.`);
 });
 
-controller.on('serialport:write', (data, context) => {
+controller.addListener('serialport:write', (data, context) => {
     console.log('>', data);
 });
 
-controller.on('serialport:read', (data) => {
+controller.addListener('serialport:read', (data) => {
     console.log('<', data);
 });
 ```
