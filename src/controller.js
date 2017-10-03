@@ -47,8 +47,8 @@ class Controller {
         'feeder:status': [],
         'sender:status': [],
         'workflow:state': [],
-        'controller:state': [],
-        'controller:settings': []
+        'controller:settings': [],
+        'controller:state': []
     };
 
     context = {
@@ -67,9 +67,12 @@ class Controller {
     loadedControllers = [];
     port = '';
     type = '';
-    state = {};
     settings = {};
-    workflowState = 'idle'; // running|paused|idle
+    state = {};
+    workflow = {
+        state: 'idle', // running|paused|idle
+        context: {}
+    };
 
     // @param {object} io The socket.io-client module.
     constructor(io) {
@@ -112,18 +115,19 @@ class Controller {
                     this.type = '';
                     this.state = {};
                     this.settings = {};
-                    this.workflowState = 'idle';
+                    this.workflow.state = 'idle';
                 }
                 if (eventName === 'workflow:state') {
-                    this.workflowState = args[0];
-                }
-                if (eventName === 'controller:state') {
-                    this.type = args[0];
-                    this.state = { ...args[1] };
+                    this.workflow.state = args[0];
+                    this.workflow.context = { ...args[1] };
                 }
                 if (eventName === 'controller:settings') {
                     this.type = args[0];
                     this.settings = { ...args[1] };
+                }
+                if (eventName === 'controller:state') {
+                    this.type = args[0];
+                    this.state = { ...args[1] };
                 }
 
                 const listeners = ensureArray(this.listeners[eventName]);
