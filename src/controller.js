@@ -48,7 +48,8 @@ class Controller {
         'sender:status': [],
         'workflow:state': [],
         'controller:settings': [],
-        'controller:state': []
+        'controller:state': [],
+        'message': []
     };
 
     context = {
