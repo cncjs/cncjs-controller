@@ -71,8 +71,7 @@ class Controller {
     settings = {};
     state = {};
     workflow = {
-        state: 'idle', // running|paused|idle
-        context: {}
+        state: 'idle' // running|paused|idle
     };
 
     // @param {object} io The socket.io-client module.
@@ -120,7 +119,6 @@ class Controller {
                 }
                 if (eventName === 'workflow:state') {
                     this.workflow.state = args[0];
-                    this.workflow.context = { ...args[1] };
                 }
                 if (eventName === 'controller:settings') {
                     this.type = args[0];
@@ -227,6 +225,11 @@ class Controller {
     //   controller.command('gcode:pause')
     // - Resume
     //   controller.command('gcode:resume')
+    // - Feeder
+    //   controller.command('feeder:feed')
+    //   controller.command('feeder:start')
+    //   controller.command('feeder:stop')
+    //   controller.command('feeder:clear')
     // - Feed Hold
     //   controller.command('feedhold')
     // - Cycle Start
