@@ -1,3 +1,3 @@
-import Controller from './controller';
+import Controller from './Controller';
 
 module.exports = Controller;
