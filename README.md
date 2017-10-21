@@ -83,108 +83,158 @@ controller.addListener('connection:read', (data) => {
 
 #### Event: 'startup'
 * `data` *(Object)* data object
-* `data.availableControllers` *(Array)* A list of available controllers
+* `data.availableControllers` *(Array)* a list of all available controllers
+
+Fired upon system startup.
 
 #### Event: 'config:change'
 
+Fired whenever config changes.
+
 #### Event: 'task:start'
 * `taskId` *(String)* task id
+
+Fired when a task is started.
 
 #### Event: 'task:finish'
 * `taskId` *(String)* task id
 * `code` *(Number)* exit code
 
+Fired when a task is finished.
+
 #### Event: 'task:error'
 * `taskId` *(String)* task id
 * `error` *(Object)* error object
 
+Fired when an error occurred.
+
 #### Event: 'controller:type'
 * `type` *(String)* controller type
+
+Fired when the controller type changes.
 
 #### Event: 'controller:settings'
 * `type` *(String)* controller type
 * `settings` *(Object)* controller settings
 
+Fired when the controller settings changes.
+
 #### Event: 'controller:state'
 * `type` *(String)* controller type
 * `state` *(Object)* controller state
 
+Fired when the controller state changes.
+
 #### Event: 'connection:open'
 * `options` *(Object)* connection options
 
+Fired upon a connection open.
+
 #### Event: 'connection:close'
 * `options` *(Object)* connection options
+
+Fired upon a connection close.
 
 #### Event: 'connection:change'
 * `options` *(Object)* connection options
 * `isOpen` *(Boolean)* True if the connection is open, flase otherwise.
 
+Fired upon a connection change.
+
 #### Event: 'connection:error'
 * `options` *(Object)* connection options
 * `error`*(Object)* error object
 
+Fired upon a connection error.
+
 #### Event: 'connection:read'
 * `options` *(Object)* connection options
 * `data` *(String)* data to read
+
+Fired once a line is received from the connection.
 
 #### Event: 'connection:write'
 * `options` *(Object)* connection options
 * `data` *(String)* data to write
 * `context` *(Object)* associated context information
 
+Fired when writing data to the connection.
+
 #### Event: 'feeder:status'
-* `status` *(Object)* feeder status object
+* `status` *(Object)* feeder status
+
+Fired when the feeder status changes.
 
 #### Event: 'sender:status'
-* `status` *(Object)* sender status object
+* `status` *(Object)* sender status
+
+Fired when the sender status changes.
 
 #### Event: 'sender:load'
 * `data` *(String)* data to load
 * `context` *(Object)* associated context information
 
+Fired when a G-code program is loaded.
+
 #### Event: 'sender:unload'
+
+Fired when a G-code program is unloaded.
 
 #### Event: 'workflow:state'
 * `state` *(String)* workflow state
 
+Fired when the workflow state changes.
+
 #### Event: 'message'
 * `message` *(String)* message string
+
+Fired when the server sends message to the client.
 
 ### Socket.IO Events
 
 #### Event: 'connect'
+
 Fired upon a connection including a successful reconnection.
 
 #### Event: 'connect_error'
 * `error` *(Object)* error object
+
 Fired upon a connection error.
 
 #### Event: 'connect_timeout'
+
 Fired upon a connection timeout.
 
 #### Event: 'error'
 * `error` *(Object)* error object
+
 Fired when an error occurs.
 
 #### Event: 'disconnect'
 * `reason` *(String)* either 'io server disconnect' or 'io client disconnect'
+
 Fired upon a disconnection.
 
 #### Event: 'reconnect'
 * `attempt` *(Number)* reconnection attempt number
+
 Fired upon a successful reconnection.
 
 #### Event: 'reconnect_attempt'
+
 Fired upon an attempt to reconnect.
 
 #### Event: 'reconnecting'
 * `attempt` *(Number)* reconnection attempt number
+
 Fired upon a successful reconnection.
 
 #### Event: 'reconnect_error'
+
 Fired upon a reconnection attempt error.
 
 #### Event: 'reconnect_failed'
+
 Fired when couldn't reconnect within `reconnectionAttempts`.
 
 ## API Methods
