@@ -98,27 +98,27 @@ reconnect_failed | Fired when couldn't reconnect within reconnectionAttempts.
 
 Name | Description 
 :--- | :----------
-startup | 
-ports |
-config:change |
-task:start |
-task:finish |
-task:error |
-controller:type |
-controller:settings |
-controller:state |
-connection:open |
-connection:close |
-connection:change |
-connection:error |
-connection:read |
-connection:write |
-feeder:status |
-sender:status |
-sender:load |
-sender:unload |
-workflow:state |
-message |
+startup(data) | 
+ports(ports) |
+config:change() |
+task:start(taskId) |
+task:finish(taskId, code) |
+task:error(taskId, err) |
+controller:type(type) |
+controller:settings(type, settings) |
+controller:state(type, state) |
+connection:open(options) |
+connection:close(options) |
+connection:change(options, isOpen) |
+connection:error(options, err) |
+connection:read(options, data) |
+connection:write(options, data, context) |
+feeder:status(status) |
+sender:status(status) |
+sender:load(name, gcode, context) |
+sender:unload() |
+workflow:state(state) |
+message(message) |
 
 ## API Methods
 
@@ -195,6 +195,12 @@ Gets a list of available serial ports.
 #### Arguments
 1. [callback] <i>(object)</i>: Called once completed.
 
+### getBaudRates([callback])
+Gets a list of supported baud rates.
+
+#### Arguments
+1. [callback] <i>(object)</i>: Called once completed.
+
 ### getMachineState()
 Gets the machine state.
 
@@ -223,18 +229,17 @@ Gets modal state.
 
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
-baudRates | array | | A list of user-defined baud rates.
+connected | boolean | | Whether the client is connected to the server.
 availableControllers | array | | A list of available controllers.
-type | string | | The controller type.
+type | string | | The controller type. One of: Grbl, Smoothie, TinyG.
 settings | object | | The controller settings.
 state | object | | The controller state.
 connection | object | | The connection object.
 connection.ident | string | | The connection identifier.
-connection.type | string | | The connection type.
-connection.settings | object | | The connection settings.
+connection.type | string | | The connection type. One of: serial, socket.
+connection.settings | object | | The connection settings.<br>serial: `{ path, baudRate }`<br>socket: `{ host, port }`
 workflow | object | | The workflow object.
-workflow.state | string | | The workflow state.
-connected | boolean | | Whether the client is connected to the server.
+workflow.state | string | | The workflow state. One of: idle, paused, running.
 
 ## License
 
