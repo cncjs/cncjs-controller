@@ -77,47 +77,115 @@ controller.addListener('connection:read', (data) => {
 });
 ```
 
-## API Events
-
-### Socket.IO Events
-
-Name | Description 
-:--- | :----------
-connect() | Fired upon a connection including a successful reconnection.
-connect_error(error) | Fired upon a connection error.
-connect_timeout() | Fired upon a connection timeout.
-error() | Fired when an error occurs.
-disconnect() | Fired upon a disconnection.
-reconnect(attempt) | Fired upon a successful reconnection.
-reconnect_attempt() | Fired upon an attempt to reconnect.
-reconnecting(attempt) | Fired upon a successful reconnection.
-reconnect_error(error) | Fired upon a reconnection attempt error.
-reconnect_failed() | Fired when couldn't reconnect within `reconnectionAttempts`.
+## API Events 
 
 ### CNCjs Events
 
-Name | Description 
-:--- | :----------
-startup(data) | 
-config:change() |
-task:start(taskId) |
-task:finish(taskId, code) |
-task:error(taskId, err) |
-controller:type(type) |
-controller:settings(type, settings) |
-controller:state(type, state) |
-connection:open(options) |
-connection:close(options) |
-connection:change(options, isOpen) |
-connection:error(options, err) |
-connection:read(options, data) |
-connection:write(options, data, context) |
-feeder:status(status) |
-sender:status(status) |
-sender:load(data, context) |
-sender:unload() |
-workflow:state(state) |
-message(message) |
+#### Event: 'startup'
+* `data` *(Object)* data object
+* `data.availableControllers` *(Array)* A list of available controllers
+
+#### Event: 'config:change'
+
+#### Event: 'task:start'
+* `taskId` *(String)* task id
+
+#### Event: 'task:finish'
+* `taskId` *(String)* task id
+* `code` *(Number)* exit code
+
+#### Event: 'task:error'
+* `taskId` *(String)* task id
+* `error` *(Object)* error object
+
+#### Event: 'controller:type'
+* `type` *(String)* controller type
+
+#### Event: 'controller:settings'
+* `type` *(String)* controller type
+* `settings` *(Object)* controller settings
+
+#### Event: 'controller:state'
+* `type` *(String)* controller type
+* `state` *(Object)* controller state
+
+#### Event: 'connection:open'
+* `options` *(Object)* connection options
+
+#### Event: 'connection:close'
+* `options` *(Object)* connection options
+
+#### Event: 'connection:change'
+* `options` *(Object)* connection options
+* `isOpen` *(Boolean)* True if the connection is open, flase otherwise.
+
+#### Event: 'connection:error'
+* `options` *(Object)* connection options
+* `error`*(Object)* error object
+
+#### Event: 'connection:read'
+* `options` *(Object)* connection options
+* `data` *(String)* data to read
+
+#### Event: 'connection:write'
+* `options` *(Object)* connection options
+* `data` *(String)* data to write
+* `context` *(Object)* associated context information
+
+#### Event: 'feeder:status'
+* `status` *(Object)* feeder status object
+
+#### Event: 'sender:status'
+* `status` *(Object)* sender status object
+
+#### Event: 'sender:load'
+* `data` *(String)* data to load
+* `context` *(Object)* associated context information
+
+#### Event: 'sender:unload'
+
+#### Event: 'workflow:state'
+* `state` *(String)* workflow state
+
+#### Event: 'message'
+* `message` *(String)* message string
+
+### Socket.IO Events
+
+#### Event: 'connect'
+Fired upon a connection including a successful reconnection.
+
+#### Event: 'connect_error'
+* `error` *(Object)* error object
+Fired upon a connection error.
+
+#### Event: 'connect_timeout'
+Fired upon a connection timeout.
+
+#### Event: 'error'
+* `error` *(Object)* error object
+Fired when an error occurs.
+
+#### Event: 'disconnect'
+* `reason` *(String)* either 'io server disconnect' or 'io client disconnect'
+Fired upon a disconnection.
+
+#### Event: 'reconnect'
+* `attempt` *(Number)* reconnection attempt number
+Fired upon a successful reconnection.
+
+#### Event: 'reconnect_attempt'
+Fired upon an attempt to reconnect.
+
+#### Event: 'reconnecting'
+* `attempt` *(Number)* reconnection attempt number
+Fired upon a successful reconnection.
+
+#### Event: 'reconnect_error'
+Fired upon a reconnection attempt error.
+
+#### Event: 'reconnect_failed'
+Fired when couldn't reconnect within `reconnectionAttempts`.
 
 ## API Methods
 
