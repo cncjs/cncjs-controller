@@ -77,9 +77,149 @@ controller.addListener('connection:read', (data) => {
 });
 ```
 
-## API
+## API Events
 
-### Properties
+### Socket.IO Events
+
+Name | Description 
+:--- | :----------
+connect | Fired upon a connection including a successful reconnection.
+connect_error | Fired upon a connection error.
+connect_timeout | Fired upon a connection timeout.
+error | Fired when an error occurs.
+disconnect | Fired upon a disconnection.
+reconnect | Fired upon a successful reconnection.
+reconnect_attempt | Fired upon an attempt to reconnect.
+reconnecting | Fired upon an attempt to reconnect.
+reconnect_error | Fired upon a reconnection attempt error.
+reconnect_failed | Fired when couldn't reconnect within reconnectionAttempts.
+
+### CNCjs Events
+
+Name | Description 
+:--- | :----------
+startup | 
+ports |
+config:change |
+task:start |
+task:finish |
+task:error |
+controller:type |
+controller:settings |
+controller:state |
+connection:open |
+connection:close |
+connection:change |
+connection:error |
+connection:read |
+connection:write |
+feeder:status |
+sender:status |
+sender:load |
+sender:unload |
+workflow:state |
+message |
+
+## API Methods
+
+### connect(host = '', options, [callback])
+Establish a connection to the server.
+
+#### Arguments
+1. host <i>(string)</i>:
+2. options <i>(object)</i>:
+3. [callback] <i>(function)</i>: The callback function.
+
+### disconnect([callback])
+Disconnect from the server.
+
+#### Arguments
+1. [callback] <i>(function)</i>: The callback function.
+
+### addListener(eventName, listener)
+Adds the `listener` function to the end of the listeners array for the event named `eventName`.
+
+#### Arguments
+1. eventName <i>(string)</i>: The name of the event.
+2. listener <i>(function)</i>: The listener function.
+
+### removeListener(eventName, listener)
+Removes the specified `listener` from the listener array for the event named `eventName`.
+
+#### Arguments
+1. eventName <i>(string)</i>: The name of the event.
+2. listener <i>(function)</i>: The listener function.
+
+### open(controllerType, connectionType, options, [callback])
+Opens a connection.
+
+#### Arguments
+1. controllerType <i>(string)</i>: One of: 'Grbl', 'Smoothe', 'TinyG'.
+2. connectionType <i>(string)</i>: One of: 'serial', 'socket'.
+3. options <i>(object)</i>: The options object.
+4. options.path <i>(string)</i>: `serial` The serial port referenced by the path.
+5. [options.baudRate=115200] <i>(string)</i>: `serial` The baud rate.
+6. options.host <i>(string)</i>: `socket` The host address to connect.
+7. [options.port=23] <i>(string)</i>: `socket` The port number.
+8. [callback] <i>(string)</i>: Called after a connection is opened.
+
+### close([callback])
+Closes an open connection.
+
+#### Arguments
+1. [callback] <i>(string)</i>: Called once a connection is closed.
+
+### command(cmd, ...args)
+Executes a command on the server.
+
+#### Arguments
+1. cmd <i>(string)</i>: The command to execute.
+
+### write(data, [context)
+Writes data to the open connection.
+
+#### Arguments
+1. data <i>(string)</i>: The data to write.
+2. [context] <i>(object)</i>: The associated context information.
+
+#### writeln(data, [context])
+Writes data and a newline character to the open connection.
+
+#### Arguments
+1. data <i>(string)</i>: The data to write.
+2. [context] <i>(object)</i>: The associated context information.
+
+### getPorts([callback])
+Gets a list of available serial ports.
+
+#### Arguments
+1. [callback] <i>(object)</i>: Called once completed.
+
+### getMachineState()
+Gets the machine state.
+
+#### Return
+<i>(string|number)</i>: Returns the machine state.
+
+### getMachinePosition()
+Gets the machine position.
+
+#### Return
+<i>(object)</i>: Returns a position object which contains x, y, z, a, b, and c properties.
+
+### getWorkPosition()
+Gets the work position.
+
+#### Return
+<i>(object)</i>: Returns a position object which contains x, y, z, a, b, and c properties.
+
+### getModalState()
+Gets modal state.
+
+#### Return
+<i>(object)</i>: Returns the modal state.
+
+## API Properties
 
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
@@ -95,105 +235,6 @@ connection.settings | object | | The connection settings.
 workflow | object | | The workflow object.
 workflow.state | string | | The workflow state.
 connected | boolean | | Whether the client is connected to the server.
-
-### Methods
-
-#### connect(host = '', options, [callback])
-Establish a connection to the server.
-
-##### Arguments
-1. host <i>(string)</i>:
-2. options <i>(object)</i>:
-3. [callback] <i>(function)</i>: The callback function.
-
-#### disconnect([callback])
-Disconnect from the server.
-
-##### Arguments
-1. [callback] <i>(function)</i>: The callback function.
-
-#### addListener(eventName, listener)
-Adds the `listener` function to the end of the listeners array for the event named `eventName`.
-
-##### Arguments
-1. eventName <i>(string)</i>: The name of the event.
-2. listener <i>(function)</i>: The listener function.
-
-#### removeListener(eventName, listener)
-Removes the specified `listener` from the listener array for the event named `eventName`.
-
-##### Arguments
-1. eventName <i>(string)</i>: The name of the event.
-2. listener <i>(function)</i>: The listener function.
-
-#### open(controllerType, connectionType, options, [callback])
-Opens a connection.
-
-##### Arguments
-1. controllerType <i>(string)</i>: One of: 'Grbl', 'Smoothe', 'TinyG'.
-2. connectionType <i>(string)</i>: One of: 'serial', 'socket'.
-3. options <i>(object)</i>: The options object.
-4. options.path <i>(string)</i>: `serial` The serial port referenced by the path.
-5. [options.baudRate=115200] <i>(string)</i>: `serial` The baud rate.
-6. options.host <i>(string)</i>: `socket` The host address to connect.
-7. [options.port=23] <i>(string)</i>: `socket` The port number.
-8. [callback] <i>(string)</i>: Called after a connection is opened.
-
-#### close([callback])
-Closes an open connection.
-
-##### Arguments
-1. [callback] <i>(string)</i>: Called once a connection is closed.
-
-#### command(cmd, ...args)
-Executes a command on the server.
-
-##### Arguments
-1. cmd <i>(string)</i>: The command to execute.
-
-#### write(data, [context)
-Writes data to the open connection.
-
-##### Arguments
-1. data <i>(string)</i>: The data to write.
-2. [context] <i>(object)</i>: The associated context information.
-
-#### writeln(data, [context])
-Writes data and a newline character to the open connection.
-
-##### Arguments
-1. data <i>(string)</i>: The data to write.
-2. [context] <i>(object)</i>: The associated context information.
-
-#### getPorts([callback])
-Gets a list of available serial ports.
-
-##### Arguments
-1. [callback] <i>(object)</i>: Called once completed.
-
-#### getMachineState()
-Gets the machine state.
-
-##### Return
-<i>(string|number)</i>: Returns the machine state.
-
-#### getMachinePosition()
-Gets the machine position.
-
-##### Return
-<i>(object)</i>: Returns a position object which contains x, y, z, a, b, and c properties.
-
-#### getWorkPosition()
-Gets the work position.
-
-##### Return
-<i>(object)</i>: Returns a position object which contains x, y, z, a, b, and c properties.
-
-#### getModalState()
-Gets modal state.
-
-##### Return
-<i>(object)</i>: Returns the modal state.
 
 ## License
 
