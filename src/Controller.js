@@ -209,7 +209,7 @@ class Controller {
     // @param {string} options.host `socket` The host address to connect.
     // @param {number} [options.port=23] `socket` The port number.
     // @param {function} [callback] Called after a connection is opened.
-    open(controllerType, connectionType, options, callback) {
+    open(controllerType, connectionType, options, callback = noop) {
         if (typeof options !== 'object') {
             options = {};
             callback = options;
@@ -230,7 +230,7 @@ class Controller {
     }
     // Closes an open connection.
     // @param {function} [callback] Called once a connection is closed.
-    close(callback) {
+    close(callback = noop) {
         if (typeof callback !== 'function') {
             callback = noop;
         }
@@ -325,17 +325,25 @@ class Controller {
         this.socket.emit('writeln', this.connection.ident, data, context);
     }
     // Gets a list of available serial ports.
-    // @param {function} [callback] Called once completed.
-    getPorts(callback) {
+    // @param {function} [callback] The error-first callback.
+    getPorts(callback = noop) {
+        if (typeof callback !== 'function') {
+            callback = noop;
+        }
         if (!this.socket) {
+            callback(new Error('The socket is not connected'));
             return;
         }
         this.socket.emit('getPorts', callback);
     }
     // Gets a list of supported baud rates.
-    // @param {function} [callback] Called once completed.
-    getBaudRates(callback) {
+    // @param {function} [callback] The error-first callback.
+    getBaudRates(callback = noop) {
+        if (typeof callback !== 'function') {
+            callback = noop;
+        }
         if (!this.socket) {
+            callback(new Error('The socket is not connected'));
             return;
         }
         this.socket.emit('getBaudRates', callback);
