@@ -11,7 +11,7 @@ module.exports = [
             path: path.join(__dirname, 'dist'),
             filename: `${pkg.name}-${pkg.version}.js`,
             libraryTarget: 'umd',
-            library: 'CNCController'
+            library: 'CNCJSController'
         },
         plugins: [
             new webpack.BannerPlugin(banner)
