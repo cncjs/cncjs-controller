@@ -83,23 +83,22 @@ controller.addListener('connection:read', (data) => {
 
 Name | Description 
 :--- | :----------
-connect | Fired upon a connection including a successful reconnection.
-connect_error | Fired upon a connection error.
-connect_timeout | Fired upon a connection timeout.
-error | Fired when an error occurs.
-disconnect | Fired upon a disconnection.
-reconnect | Fired upon a successful reconnection.
-reconnect_attempt | Fired upon an attempt to reconnect.
-reconnecting | Fired upon an attempt to reconnect.
-reconnect_error | Fired upon a reconnection attempt error.
-reconnect_failed | Fired when couldn't reconnect within reconnectionAttempts.
+connect() | Fired upon a connection including a successful reconnection.
+connect_error(error) | Fired upon a connection error.
+connect_timeout() | Fired upon a connection timeout.
+error() | Fired when an error occurs.
+disconnect() | Fired upon a disconnection.
+reconnect(attempt) | Fired upon a successful reconnection.
+reconnect_attempt() | Fired upon an attempt to reconnect.
+reconnecting(attempt) | Fired upon a successful reconnection.
+reconnect_error(error) | Fired upon a reconnection attempt error.
+reconnect_failed() | Fired when couldn't reconnect within `reconnectionAttempts`.
 
 ### CNCjs Events
 
 Name | Description 
 :--- | :----------
 startup(data) | 
-ports(ports) |
 config:change() |
 task:start(taskId) |
 task:finish(taskId, code) |
@@ -115,7 +114,7 @@ connection:read(options, data) |
 connection:write(options, data, context) |
 feeder:status(status) |
 sender:status(status) |
-sender:load(name, gcode, context) |
+sender:load(data, context) |
 sender:unload() |
 workflow:state(state) |
 message(message) |
@@ -193,13 +192,13 @@ Writes data and a newline character to the open connection.
 Gets a list of available serial ports.
 
 #### Arguments
-1. [callback] <i>(object)</i>: Called once completed.
+1. [callback] <i>(function)</i>: The error-first callback.
 
 ### getBaudRates([callback])
 Gets a list of supported baud rates.
 
 #### Arguments
-1. [callback] <i>(object)</i>: Called once completed.
+1. [callback] <i>(function)</i>: The error-first callback.
 
 ### getMachineState()
 Gets the machine state.
