@@ -3,7 +3,9 @@
 [![NPM](https://nodei.co/npm/cncjs-controller.png?downloads=true&stars=true)](https://www.npmjs.com/package/cncjs-controller)
 
 **A controller library for event-based communication between client and CNCjs server**
- 
+
+This branch is for CNCjs 2.0.0 or later versions. If you're looking for the previous version (<= 1.9), please visit the [v1](https://github.com/cncjs/cncjs-controller/tree/v1) branch.
+
 ## Installation
 
 ```sh
