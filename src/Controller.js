@@ -72,9 +72,6 @@ class Controller {
         zmax: 0
     };
 
-    // User-defined baud rates
-    baudRates = [];
-
     // Available controllers
     availableControllers = [];
 
@@ -164,12 +161,9 @@ class Controller {
         });
 
         this.socket.on('startup', (data) => {
-            const { availableControllers, baudRates } = { ...data };
+            const { availableControllers } = { ...data };
 
             this.availableControllers = ensureArray(availableControllers);
-
-            // User-defined baud rates
-            this.baudRates = ensureArray(baudRates);
 
             if (callback) {
                 callback(null);
@@ -337,6 +331,14 @@ class Controller {
             return;
         }
         this.socket.emit('getPorts', callback);
+    }
+    // Gets a list of supported baud rates.
+    // @param {function} [callback] Called once completed.
+    getBaudRates(callback) {
+        if (!this.socket) {
+            return;
+        }
+        this.socket.emit('getBaudRates', callback);
     }
     // Gets the machine state.
     // @return {string|number} Returns the machine state.
