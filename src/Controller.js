@@ -41,7 +41,6 @@ class Controller {
 
         // System Events
         'startup': [],
-        'ports': [],
         'config:change': [],
         'task:start': [],
         'task:finish': [],
