@@ -1,6 +1,6 @@
 {
   "name": "cncjs-controller",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-alpha.1",
   "description": "A controller library for event-based communication between client and CNCjs server.",
   "main": "lib/index.js",
   "scripts": {
