@@ -8,6 +8,7 @@ import {
     METRIC_UNITS,
     // Controller
     GRBL,
+    MARLIN,
     SMOOTHIE,
     TINYG
 } from './constants';
@@ -350,7 +351,7 @@ class Controller {
     // Gets the machine state.
     // @return {string|number} Returns the machine state.
     getMachineState() {
-        if ([GRBL, SMOOTHIE, TINYG].indexOf(this.type) < 0) {
+        if ([GRBL, MARLIN, SMOOTHIE, TINYG].indexOf(this.type) < 0) {
             return '';
         }
 
@@ -361,6 +362,8 @@ class Controller {
         let machineState;
 
         if (this.type === GRBL) {
+            machineState = this.state.machineState;
+        } else if (this.type === MARLIN) {
             machineState = this.state.machineState;
         } else if (this.type === SMOOTHIE) {
             machineState = this.state.machineState;
@@ -394,6 +397,23 @@ class Controller {
                 ...mpos
             }, (val) => {
                 return ($13 > 0) ? in2mm(val) : val;
+            });
+        }
+
+        // Marlin
+        if (this.type === MARLIN) {
+            const { pos, modal = {} } = this.state;
+            const units = {
+                'G20': IMPERIAL_UNITS,
+                'G21': METRIC_UNITS
+            }[modal.units];
+
+            // Machine position are reported in current units
+            return mapValues({
+                ...defaultMachinePosition,
+                ...pos
+            }, (val) => {
+                return (units === IMPERIAL_UNITS) ? in2mm(val) : val;
             });
         }
 
@@ -455,6 +475,23 @@ class Controller {
             });
         }
 
+        // Marlin
+        if (this.type === MARLIN) {
+            const { pos, modal = {} } = this.state;
+            const units = {
+                'G20': IMPERIAL_UNITS,
+                'G21': METRIC_UNITS
+            }[modal.units];
+
+            // Work position are reported in current units
+            return mapValues({
+                ...defaultWorkPosition,
+                ...pos
+            }, (val) => {
+                return (units === IMPERIAL_UNITS) ? in2mm(val) : val;
+            });
+        }
+
         // Smoothieware
         if (this.type === SMOOTHIE) {
             const { wpos, modal = {} } = this.state;
@@ -508,6 +545,13 @@ class Controller {
         };
 
         if (this.type === GRBL) {
+            return {
+                ...defaultModalState,
+                ...this.state.modal
+            };
+        }
+
+        if (this.type === MARLIN) {
             return {
                 ...defaultModalState,
                 ...this.state.modal
