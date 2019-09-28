@@ -391,7 +391,7 @@ class Controller {
             let { $13 = 0 } = { ...this.settings.settings };
             $13 = Number($13) || 0;
 
-            // Machine position are reported in mm ($13=0) or inches ($13=1)
+            // Machine position is reported in mm ($13=0) or inches ($13=1)
             return mapValues({
                 ...defaultMachinePosition,
                 ...mpos
@@ -402,19 +402,13 @@ class Controller {
 
         // Marlin
         if (this.type === MARLIN) {
-            const { pos, modal = {} } = this.state;
-            const units = {
-                'G20': IMPERIAL_UNITS,
-                'G21': METRIC_UNITS
-            }[modal.units];
+            const { pos } = this.state;
 
-            // Machine position are reported in current units
-            return mapValues({
+            // Machine position is reported in mm regardless of the current units
+            return {
                 ...defaultMachinePosition,
                 ...pos
-            }, (val) => {
-                return (units === IMPERIAL_UNITS) ? in2mm(val) : val;
-            });
+            };
         }
 
         // Smoothieware
@@ -425,7 +419,7 @@ class Controller {
                 'G21': METRIC_UNITS
             }[modal.units];
 
-            // Machine position are reported in current units
+            // Machine position is reported in current units
             return mapValues({
                 ...defaultMachinePosition,
                 ...mpos
@@ -466,7 +460,7 @@ class Controller {
             let { $13 = 0 } = { ...this.settings.settings };
             $13 = Number($13) || 0;
 
-            // Work position are reported in mm ($13=0) or inches ($13=1)
+            // Work position is reported in mm ($13=0) or inches ($13=1)
             return mapValues({
                 ...defaultWorkPosition,
                 ...wpos
@@ -477,19 +471,13 @@ class Controller {
 
         // Marlin
         if (this.type === MARLIN) {
-            const { pos, modal = {} } = this.state;
-            const units = {
-                'G20': IMPERIAL_UNITS,
-                'G21': METRIC_UNITS
-            }[modal.units];
+            const { pos } = this.state;
 
-            // Work position are reported in current units
-            return mapValues({
+            // Work position is reported in mm regardless of the current units
+            return {
                 ...defaultWorkPosition,
                 ...pos
-            }, (val) => {
-                return (units === IMPERIAL_UNITS) ? in2mm(val) : val;
-            });
+            };
         }
 
         // Smoothieware
@@ -500,7 +488,7 @@ class Controller {
                 'G21': METRIC_UNITS
             }[modal.units];
 
-            // Work position are reported in current units
+            // Work position is reported in current units
             return mapValues({
                 ...defaultWorkPosition,
                 ...wpos
@@ -517,7 +505,7 @@ class Controller {
                 'G21': METRIC_UNITS
             }[modal.units];
 
-            // Work position are reported in current units, and also apply any offsets.
+            // Work position is reported in current units, and also apply any offsets.
             return mapValues({
                 ...defaultWorkPosition,
                 ...wpos
