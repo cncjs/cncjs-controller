@@ -5,11 +5,9 @@ group: edge
 language: node_js
 
 node_js:
+  - '10'
   - '8'
-  - '7'
   - '6'
-  - '5'
-  - '4'
 
 before_install:
   - npm install -g npm
