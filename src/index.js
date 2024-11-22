@@ -1,3 +1,3 @@
 import Controller from './Controller';
 
-module.exports = Controller;
+export default Controller;
