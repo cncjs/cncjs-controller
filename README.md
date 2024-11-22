@@ -9,8 +9,8 @@ This branch is for CNCjs 2.0.0 or later versions. If you're looking for the prev
 ## Installation
 
 ```sh
-npm install --save cncjs-controller@latest
-npm install --save socket.io-client@1.7  # socket.io-client 1.7 is recommended
+npm install --save cncjs-controller@2.x
+npm install --save socket.io-client
 ```
 
 ## Usage
