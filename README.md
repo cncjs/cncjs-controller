@@ -1,4 +1,4 @@
-# cncjs-controller [![build status](https://travis-ci.org/cncjs/cncjs-controller.svg?branch=master)](https://travis-ci.org/cncjs/cncjs-controller) [![Coverage Status](https://coveralls.io/repos/github/cncjs/cncjs-controller/badge.svg?branch=master)](https://coveralls.io/github/cncjs/cncjs-controller?branch=master)
+# cncjs-controller [![codecov](https://codecov.io/gh/cncjs/cncjs-controller/graph/badge.svg?token=MNXPXFY33Z)](https://codecov.io/gh/cncjs/cncjs-controller)
 
 [![NPM](https://nodei.co/npm/cncjs-controller.png?downloads=true&stars=true)](https://www.npmjs.com/package/cncjs-controller)
 
@@ -8,7 +8,7 @@
 
 ```sh
 npm install --save cncjs-controller
-npm install --save socket.io-client@1.7  # socket.io-client 1.7 is recommended
+npm install --save socket.io-client
 ```
 
 ## Usage
