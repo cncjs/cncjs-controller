@@ -1,6 +1,6 @@
 {
   "name": "cncjs-controller",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "A controller library for event-based communication between client and CNCjs server.",
   "author": "Cheton Wu",
   "license": "MIT",
