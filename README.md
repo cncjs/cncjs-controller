@@ -7,7 +7,7 @@
 ## Installation
 
 ```sh
-npm install --save cncjs-controller
+npm install --save cncjs-controller@1.x
 npm install --save socket.io-client
 ```
 
