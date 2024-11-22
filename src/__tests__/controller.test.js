@@ -16,6 +16,12 @@ describe('Controller', () => {
     };
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+    socketMock = null;
+    ioMock = null;
+  });
+
   it('should throw an error if io is not provided', () => {
     expect(() => new Controller()).toThrow('Expected the socket.io-client module, but got: undefined');
   });
